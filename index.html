@@ -1,280 +1,7 @@
-<!DOCTYPE html>
-<html lang="id">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nitta Group Catalog</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
-    <!-- FontAwesome for icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
-    <style>
-        body {
-            font-family: 'Inter', sans-serif;
-            -webkit-tap-highlight-color: transparent;
-        }
-
-        /* Swing Animation */
-        @keyframes swing {
-            20% { transform: rotate3d(0, 0, 1, 15deg); }
-            40% { transform: rotate3d(0, 0, 1, -10deg); }
-            60% { transform: rotate3d(0, 0, 1, 5deg); }
-            80% { transform: rotate3d(0, 0, 1, -5deg); }
-            to { transform: rotate3d(0, 0, 1, 0deg); }
-        }
-
-        .swing-on-scroll {
-            transform-origin: top center;
-        }
-        
-        .animate-swing {
-            animation: swing 1s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
-        }
-
-        /* Slide animations for page transitions */
-        .page {
-            display: none;
-            animation: fadeIn 0.4s ease-in-out;
-        }
-        .page.active {
-            display: flex;
-            flex-direction: column;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(15px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        /* Glassmorphism Classes */
-        .glass-header {
-            background: rgba(255, 255, 255, 0.85);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
-        }
-
-        .glass-button {
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
-            border: 1px solid rgba(0, 0, 0, 0.05);
-            box-shadow: 0 10px 40px -10px rgba(0, 0, 0, 0.15);
-        }
-
-        /* Modern Subtle Dot Pattern */
-        .bg-pattern {
-            background-color: #f8fafc;
-            background-image: radial-gradient(rgba(15, 23, 42, 0.08) 1.5px, transparent 1.5px);
-            background-size: 24px 24px;
-        }
-
-        /* Smooth image loading */
-        img {
-            transition: opacity 0.3s ease-in-out;
-        }
-        img[loading] {
-            opacity: 0;
-        }
-        img.loaded {
-            opacity: 1;
-        }
-    </style>
-</head>
-<body class="text-slate-800 antialiased overflow-x-hidden bg-pattern relative z-0">
-
-    <!-- Decorative Background Glow/Orbs -->
-    <div class="fixed inset-0 z-[-1] pointer-events-none overflow-hidden">
-        <div class="absolute top-[-5%] left-[-10%] w-72 h-72 bg-slate-300/30 rounded-full blur-3xl"></div>
-        <div class="absolute top-[40%] right-[-10%] w-80 h-80 bg-gray-300/30 rounded-full blur-3xl"></div>
-        <div class="absolute bottom-[-5%] left-[20%] w-64 h-64 bg-slate-400/20 rounded-full blur-3xl"></div>
-    </div>
-
-    <!-- PAGE 1: HOME (DIVISIONS) -->
-    <div id="homePage" class="page active min-h-screen">
-        
-        <!-- Header -->
-        <header class="bg-gradient-to-br from-slate-900 to-black text-white rounded-b-[40px] shadow-lg flex flex-col items-center justify-center pt-12 pb-10 relative overflow-hidden px-4">
-            <div class="absolute inset-0 bg-gradient-to-b from-white/10 to-transparent"></div>
-            
-            <div class="w-28 h-28 rounded-full border-[4px] border-slate-800 bg-white flex items-center justify-center p-1 shadow-xl mb-4 relative z-10">
-                <img src="aset/grup.webp" alt="Logo Nitta Group" class="w-full h-full object-cover rounded-full" onerror="this.src='https://placehold.co/400x400/f1f5f9/0f172a?text=NG'">
-            </div>
-            <h1 class="text-2xl font-bold tracking-wide relative z-10 mb-3">Nitta Group</h1>
-            
-            <p class="text-xs text-slate-300 relative z-10 font-medium text-center leading-relaxed max-w-sm px-2">
-                Nitta Group merupakan grup usaha yang menaungi berbagai unit bisnis di bidang kesehatan, industri kreatif, makanan dan aneka produk menarik lainnya. Dengan mengutamakan kualitas, inovasi, dan pelayanan terbaik, kami berkomitmen menghadirkan produk yang bermanfaat serta menjadi mitra terpercaya bagi masyarakat dan dunia usaha.
-            </p>
-        </header>
-
-        <!-- Divisions List -->
-        <main class="container mx-auto px-4 mt-8 flex-1 pb-12">
-            <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-4" id="divisionsContainer">
-                <!-- Injected via JS -->
-            </div>
-        </main>
-
-        <!-- Footer & Maps Section -->
-        <footer class="bg-gradient-to-br from-slate-900 to-black text-white rounded-t-[40px] shadow-[0_-15px_40px_-15px_rgba(0,0,0,0.4)] pt-12 pb-8 mt-auto px-6 relative z-10">
-            <div class="absolute top-0 left-1/2 -translate-x-1/2 w-12 h-1.5 bg-slate-700 rounded-full mt-3"></div>
-            
-            <div class="text-center mb-8 px-2">
-                <h3 class="text-xl font-bold mb-3 tracking-wide text-white">Nitta Group</h3>
-                <p class="text-sm text-slate-400 leading-relaxed font-medium">Menghadirkan solusi di bidang kesehatan, industri kreatif, makanan, dan produk berkualitas melalui inovasi dan pelayanan terbaik.</p>
-            </div>
-
-            <!-- Maps Card -->
-            <div class="mb-5 rounded-2xl overflow-hidden shadow-sm border border-slate-700 bg-slate-800/50 p-1 backdrop-blur-sm">
-                <iframe 
-                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3955.578663855512!2d112.2338006!3d-7.5342004!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e783fc11f592ad1%3A0x6b107e0c4a4e1b8b!2sJl.%20Laksda%20Adi%20Sucipto%20No.14A%2C%20Sambongdukuh%2C%20Kec.%20Jombang%2C%20Kabupaten%20Jombang%2C%20Jawa%20Timur%2061413!5e0!3m2!1sid!2sid!4v1700000000000!5m2!1sid!2sid" 
-                    width="100%" 
-                    height="180" 
-                    style="border:0; border-radius: 12px;" 
-                    allowfullscreen="" 
-                    loading="lazy" 
-                    referrerpolicy="no-referrer-when-downgrade">
-                </iframe>
-            </div>
-
-            <!-- CTA Maps -->
-            <a href="https://maps.google.com/?q=Jl.+Laksda+Adi+Sucipto+No.14A,+Sambongdukuh,+Jombang" target="_blank" class="flex justify-center items-center gap-2 w-full bg-white hover:bg-slate-200 text-slate-900 py-3.5 rounded-xl font-bold mb-8 transition-colors border border-transparent active:scale-95 shadow-sm">
-                <i class="fas fa-location-arrow"></i> Buka Navigasi Maps
-            </a>
-
-            <!-- Copyright -->
-            <div class="border-t border-slate-800 pt-6 flex flex-col items-center justify-center">
-                <p class="text-xs text-slate-500 font-semibold">&copy; 2026 Nitta Group. All rights reserved.</p>
-            </div>
-        </footer>
-    </div>
-
-    <!-- PAGE 2: CATALOG (PRODUCTS) -->
-    <div id="catalogPage" class="page min-h-screen pb-28">
-        
-        <!-- Header with Back Button -->
-        <header class="glass-header p-4 sticky top-0 z-20 flex items-center justify-between">
-            <button onclick="goHome()" class="w-10 h-10 flex items-center justify-center text-slate-700 bg-white rounded-full shadow-sm border border-slate-200 hover:bg-slate-50 transition-colors active:scale-95">
-                <i class="fas fa-arrow-left"></i>
-            </button>
-            <h2 id="catalogTitle" class="text-lg font-bold text-center flex-1 pr-10 text-slate-800 tracking-tight">Katalog</h2>
-        </header>
-
-        <!-- Product List -->
-        <main class="container mx-auto px-4 py-6 flex-1">
-            <div id="productsContainer" class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-4">
-                <!-- Products will be injected here via JS -->
-            </div>
-        </main>
-
-        <!-- Floating Cart Button -->
-        <div class="fixed bottom-6 right-0 left-0 flex justify-center z-30 px-4 pointer-events-none">
-            <button onclick="openCart()" class="glass-button pointer-events-auto w-full max-w-md py-3.5 px-5 rounded-2xl flex justify-between items-center text-slate-800 font-semibold transform transition active:scale-95">
-                <div class="flex items-center gap-3">
-                    <div class="relative">
-                        <div class="w-10 h-10 bg-slate-100 rounded-full flex items-center justify-center text-slate-800">
-                            <i class="fas fa-shopping-basket text-lg"></i>
-                        </div>
-                        <span id="cartBadge" class="absolute -top-1 -right-1 bg-red-500 text-white text-[10px] font-bold w-5 h-5 flex items-center justify-center rounded-full shadow-md hidden border-2 border-white">0</span>
-                    </div>
-                    <div class="flex flex-col items-start">
-                        <span class="text-[10px] text-slate-500 font-medium uppercase tracking-wider">Total Pesanan</span>
-                        <span id="cartTotalPreview" class="text-slate-800 font-black text-sm">Rp 0</span>
-                    </div>
-                </div>
-                <div class="bg-slate-800 text-white px-4 py-2 rounded-xl text-xs font-bold flex items-center gap-2 shadow-sm shadow-slate-800/30">
-                    Checkout <i class="fas fa-chevron-right text-[10px]"></i>
-                </div>
-            </button>
-        </div>
-    </div>
-
-    <!-- Floating WhatsApp Button -->
-    <a href="https://wa.me/6281233250989?text=Halo%20Admin%20Nitta%20Group,%20saya%20ingin%20bertanya%20sesuatu..." target="_blank" class="fixed bottom-28 right-5 z-40 bg-green-500 text-white w-14 h-14 rounded-full flex items-center justify-center shadow-[0_4px_20px_rgba(34,197,94,0.4)] hover:bg-green-600 transition-transform active:scale-90 border-2 border-white">
-        <i class="fab fa-whatsapp text-3xl"></i>
-        <span class="absolute top-0 right-0 w-3 h-3 bg-red-500 border-2 border-white rounded-full animate-ping"></span>
-        <span class="absolute top-0 right-0 w-3 h-3 bg-red-500 border-2 border-white rounded-full"></span>
-    </a>
-
-    <!-- MODAL: CART / CHECKOUT -->
-    <div id="cartModal" class="fixed inset-0 bg-slate-900/40 backdrop-blur-sm z-50 hidden flex flex-col justify-end transition-opacity opacity-0">
-        <div class="bg-white w-full max-w-md mx-auto rounded-t-[32px] h-[85vh] flex flex-col transform translate-y-full transition-transform duration-300 shadow-2xl" id="cartContent">
-            
-            <!-- Modal Header -->
-            <div class="p-5 border-b border-gray-100 flex justify-between items-center bg-white rounded-t-[32px] relative z-20 shrink-0">
-                <h3 class="text-xl font-bold text-slate-800">Keranjang Belanja</h3>
-                <button onclick="closeCart()" class="w-8 h-8 flex items-center justify-center text-slate-400 hover:text-slate-700 bg-slate-100 rounded-full transition-colors active:scale-95">
-                    <i class="fas fa-times"></i>
-                </button>
-            </div>
-
-            <!-- Cart Items & Customer Form (Scrollable Area) -->
-            <div class="flex-1 overflow-y-auto p-5 relative overscroll-contain bg-slate-50/50">
-                
-                <!-- List Belanjaan -->
-                <div id="cartItemsList" class="flex flex-col gap-3 mb-6">
-                    <!-- Injected here -->
-                </div>
-
-                <!-- Formulir Data Pemesan -->
-                <div id="customerFormSection" class="hidden bg-white p-5 rounded-[20px] border border-slate-200 shadow-sm mb-4">
-                    <h4 class="font-bold text-slate-800 text-sm mb-4 border-b border-slate-100 pb-2 flex items-center gap-2">
-                        <i class="fas fa-truck text-slate-400"></i> Informasi Pengiriman
-                    </h4>
-                    <div class="space-y-4">
-                        <div>
-                            <label class="block text-[10px] font-bold text-slate-500 uppercase tracking-wider mb-1.5">Nama Lengkap <span class="text-red-500">*</span></label>
-                            <input type="text" id="custName" placeholder="Masukkan nama Anda" class="w-full bg-slate-50 border border-slate-200 text-sm rounded-xl px-3.5 py-3 focus:outline-none focus:ring-2 focus:ring-slate-800 focus:border-transparent transition-all">
-                        </div>
-                        <div>
-                            <label class="block text-[10px] font-bold text-slate-500 uppercase tracking-wider mb-1.5">No. WhatsApp <span class="text-red-500">*</span></label>
-                            <input type="tel" id="custWA" placeholder="Contoh: 08123456789" class="w-full bg-slate-50 border border-slate-200 text-sm rounded-xl px-3.5 py-3 focus:outline-none focus:ring-2 focus:ring-slate-800 focus:border-transparent transition-all">
-                        </div>
-                        <div>
-                            <label class="block text-[10px] font-bold text-slate-500 uppercase tracking-wider mb-1.5">Alamat Lengkap <span class="text-red-500">*</span></label>
-                            <textarea id="custAddress" rows="3" placeholder="Nama Jalan, RT/RW, Desa, Kec, Kota, Patokan" class="w-full bg-slate-50 border border-slate-200 text-sm rounded-xl px-3.5 py-3 focus:outline-none focus:ring-2 focus:ring-slate-800 focus:border-transparent transition-all resize-none"></textarea>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Pesan Keranjang Kosong -->
-                <div id="emptyCartMessage" class="absolute inset-0 flex flex-col items-center justify-center text-slate-400 bg-transparent z-10 hidden">
-                    <div class="w-20 h-20 bg-slate-200 rounded-full flex items-center justify-center mb-4 text-slate-400">
-                        <i class="fas fa-box-open text-3xl"></i>
-                    </div>
-                    <p class="font-medium text-slate-500">Keranjang masih kosong.</p>
-                    <p class="text-xs mt-1 text-slate-400">Yuk, pilih produk favoritmu!</p>
-                </div>
-            </div>
-
-            <!-- Checkout Section -->
-            <div class="p-6 border-t border-gray-100 bg-white shadow-[0_-10px_20px_-10px_rgba(0,0,0,0.05)] shrink-0">
-                <div class="flex justify-between items-end mb-5">
-                    <span class="text-slate-500 font-medium text-sm">Total Belanja</span>
-                    <span id="finalTotal" class="text-2xl font-black text-slate-900">Rp 0</span>
-                </div>
-                <button onclick="checkoutToWA()" class="w-full bg-green-500 hover:bg-green-600 text-white py-4 rounded-2xl font-bold text-base flex justify-center items-center gap-2 transition-transform active:scale-[0.98] shadow-lg shadow-green-500/30">
-                    <i class="fab fa-whatsapp text-xl"></i> Lanjut ke WA Admin
-                </button>
-            </div>
-        </div>
-    </div>
-
-    <!-- MODAL: IMAGE ZOOM (LIGHTBOX) -->
-    <div id="imageZoomModal" class="fixed inset-0 bg-black/90 backdrop-blur-sm z-[100] hidden flex-col justify-center items-center transition-opacity opacity-0 cursor-pointer" onclick="closeImageZoom()">
-        <button class="absolute top-6 right-6 w-10 h-10 flex items-center justify-center text-white bg-white/20 rounded-full hover:bg-white/40 transition-colors z-[110]">
-            <i class="fas fa-times text-xl"></i>
-        </button>
-        <div class="relative w-full max-w-2xl px-4 flex flex-col items-center">
-            <img id="zoomedImage" src="" alt="Zoomed" class="w-full max-h-[70vh] object-contain rounded-lg shadow-2xl transition-transform duration-300 transform scale-95" onclick="event.stopPropagation()">
-            <h3 id="zoomedImageTitle" class="text-white mt-5 font-bold text-center text-lg tracking-wide"></h3>
-        </div>
-    </div>
-
-    <script>
+<script>
         // --- CONFIG & DATA ---
         const waNumber = "6281233250989"; 
-        const csvUrl = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vTF0tFUByLrE9Dc89L8urFEJJeCxm-0mxTpH0WkDiEN6jtJHDCbT5-OVgQktsIhwUG6feWfQGH_dL7V/pub?gid=0&single=true&output=csv'; // Ganti dengan link CSV Google Sheets kamu
+        const csvUrl = 'PASTE_LINK_CSV_GOOGLE_SHEETS_ANDA_DI_SINI'; // Ganti dengan link lu bro
 
         const divisions = [
             { id: 'medika', name: 'Apotek Nitta Medika', img: 'aset/apotek.webp' },
@@ -288,34 +15,119 @@
             { id: 'buku', name: 'Buku Nitta', img: 'aset/buku.webp' }
         ];
 
-        // Produk dikosongkan dulu, nanti ditarik dinamis dari Google Sheets CSV
-        let productsData = {
-            medika: [],
-            superfood: [],
-            bross: [],
-            lemari: [],
-            slondok: [],
-            nira: [],
-            mc: [],
-            marketing: [],
-            buku: []
+        // INI DATA LAMA LU GUE BALIKIN BIAR GA HILANG (JANGAN DIHAPUS)
+        const dataBawaan = {
+            medika: [
+                { id: 'med_1', name: 'Nutri-Well', price: 317000, img: 'aset/nutri.webp', desc: 'Vitamin penjaga kesehatan tulang dan imunitas.' },
+                { id: 'med_2', name: 'Now Vitamin D-3', price: 56000, img: 'aset/nou.webp', desc: 'Suplemen vitamin D-3 untuk kesehatan tulang.' },
+                { id: 'med_3', name: 'Magnesium Glycinate', price: 76000, img: 'aset/magnesium2.webp', desc: 'Suplemen magnesium untuk kesehatan otot dan saraf.' },
+                { id: 'med_4', name: 'Nutri-well Magnesium 30 Kapsul', price: 65000, img: 'aset/magnesium.webp', desc: 'Menghangatkan badan dan meredakan perut kembung.' },
+                { id: 'med_5', name: 'Imboost With Vit C', price: 43000, img: 'aset/imboost2.webp', desc: 'Bantu Jaga Daya tahan tubuh.' },
+                { id: 'med_6', name: 'Imboost With Vit C & D3', price: 45000, img: 'aset/imboost.webp', desc: 'Bantu Jaga Daya tahan tubuh dan kesehatan tulang.' },
+                { id: 'med_7', name: 'Sidomuncul Vit D3', price: 96000, img: 'aset/D3.webp', desc: 'Dukungan untuk tulang kuat dan imun maksimal.' },
+                { id: 'med_8', name: 'Folamil Gold', price: 184000, img: 'aset/folamil.webp', desc: 'Nutrisi untuk ibu hamil.' },
+                { id: 'med_9', name: 'Collagen Bone Complete', price: 54000, img: 'aset/collagen.webp', desc: 'Meningkatkan kepadatan dan kesehatan tulang.' },
+                { id: 'med_10', name: 'Cerebrofort', price: 26000, img: 'aset/cerebrofort.webp', desc: 'Mendukung perkembangan otak dan fungsi kognitif.' },
+                { id: 'med_11', name: 'Carrol SP', price: 15000, img: 'aset/carroll.webp', desc: 'Meredakan nyeri pinggang dan pegal linu.' },
+                { id: 'med_12', name: 'Now Calcium & Magnesium', price: 15000, img: 'aset/calcium.webp', desc: 'Mendukung perkembangan otak dan fungsi kognitif.' },
+                { id: 'med_13', name: 'Beras Merah', price: 22000, img: 'aset/beras.webp', desc: 'Membantu menjaga berat badan & sumber serat tinggi.' },
+                { id: 'med_14', name: 'Avita Glow', price: 15000, img: 'aset/avita.webp', desc: 'Membantu menjaga kekuatan dan kepadatan tulang & gigi.' },
+                { id: 'med_15', name: 'Sewa Alat Kesehatan', price: 15000, img: 'aset/sewa.webp', desc: 'Sewa alat kesehatan untuk kebutuhan medis.' }
+            ],
+            superfood: [
+                { id: 'sup_1', name: 'Bawang Hitam 200 gr', price: 75000, img: 'aset/bawang1.webp', desc: 'Meningkatkan sistem imun & Kesehatan jantung.' },
+                { id: 'sup_2', name: 'Bawang Hitam 95 gr', price: 35000, img: 'aset/bawang2.webp', desc: 'Meningkatkan sistem imun & Kesehatan jantung.' },
+                { id: 'sup_3', name: 'Madu Bawang Hitam 300 gr', price: 80000, img: 'aset/bawang3.webp', desc: 'Meningkatkan sistem imun & Kesehatan jantung.' },
+                { id: 'sup_4', name: 'Madu Bawang Hitam 125 gr', price: 40000, img: 'aset/bawang4.webp', desc: 'Meningkatkan sistem imun & Kesehatan jantung.' },
+                { id: 'sup_5', name: 'Bawang Hitam Kulit Basah 200 gr', price: 40000, img: 'aset/bawang5.webp', desc: 'Meningkatkan sistem imun & Kesehatan jantung.' },
+                { id: 'sup_6', name: 'Bawang Hitam Kulit Basah 95 gr', price: 20000, img: 'aset/bawang6.webp', desc: 'Meningkatkan sistem imun & Kesehatan jantung.' },
+                { id: 'sup_7', name: 'Promo Harga Garlixa Kulit Basah', price: 18000, img: 'aset/bawang7.webp', desc: 'Meningkatkan sistem imun & Kesehatan jantung.' },
+                { id: 'sup_8', name: 'Promo Spesial Garlixa Kulir Kering', price: 30000, img: 'aset/bawang8.webp', desc: 'Meningkatkan sistem imun & Kesehatan jantung.' },
+                { id: 'sup_9', name: 'Konsiyasi Produk Super Food', price: 18000, img: 'aset/bawang9.webp', desc: 'Meningkatkan sistem imun & Kesehatan jantung.' }
+            ],
+            bross: [
+                { id: 'bross_1', name: 'Purple Brooch', price: 50000, img: 'aset/brooch.webp', desc: 'Bross premium cocok untuk hadiah.' },
+                { id: 'bross_2', name: 'Gold Brooch', price: 95000, img: 'aset/gold.webp', desc: 'Bross premium cocok untuk hadiah.' },
+                { id: 'bross_3', name: 'Kupu Premium Brooch', price: 35000, img: 'aset/kupu.webp', desc: 'Bross premium cocok untuk hadiah.' },
+                { id: 'bross_4', name: 'Grey Pink Brooch', price: 130000, img: 'aset/grey.webp', desc: 'Bross premium cocok untuk hadiah.' },
+                { id: 'bross_5', name: 'LingLing Brooch', price: 100000, img: 'aset/ling.webp', desc: 'Bross premium cocok untuk hadiah.' },
+                { id: 'bross_6', name: 'Mix Brooches', price: 50000, img: 'aset/mix.webp', desc: 'Bross premium cocok untuk hadiah.' },
+                { id: 'bross_7', name: 'Green Orange Brooch', price: 70000, img: 'aset/orange.webp', desc: 'Bross premium cocok untuk hadiah.' },
+                { id: 'bross_8', name: 'Smooth Pink Brooch', price: 70000, img: 'aset/pink.webp', desc: 'Bross premium cocok untuk hadiah.' },
+                { id: 'bross_9', name: 'Purple Brooch', price: 45000, img: 'aset/purple.webp', desc: 'Bross premium cocok untuk hadiah.' },
+                { id: 'bross_10', name: 'Gold Red Brooch', price: 70000, img: 'aset/red.webp', desc: 'Bross premium cocok untuk hadiah.' },
+                { id: 'bross_11', name: 'Broken White Brooch', price: 75000, img: 'aset/white.webp', desc: 'Bross premium cocok untuk hadiah.' },
+                { id: 'bross_12', name: 'Xie Xie Brooch', price: 150000, img: 'aset/xie.webp', desc: 'Bross premium cocok untuk hadiah.' },
+                { id: 'bross_13', name: 'Limited Edition Brooch', price: 60000, img: 'aset/bross1.webp', desc: 'Bross Limited Edition.' },
+                { id: 'bross_14', name: 'Limited Edition Brooch', price: 300000, img: 'aset/bross2.webp', desc: 'Bross Limited Edition.' },
+                { id: 'bross_15', name: 'Limited Edition Brooch', price: 150000, img: 'aset/bross3.webp', desc: 'Bross Limited Edition.' },
+                { id: 'bross_16', name: 'Limited Edition Brooch', price: 50000, img: 'aset/bross4.webp', desc: 'Bross Limited Edition.' },
+                { id: 'bross_17', name: 'Limited Edition Brooch', price: 50000, img: 'aset/bross7.webp', desc: 'Bross Limited Edition.' },
+                { id: 'bross_18', name: 'Limited Edition Brooch', price: 100000, img: 'aset/bross8.webp', desc: 'Bross Limited Edition.' },
+                { id: 'bross_19', name: 'Limited Edition Brooch', price: 220000, img: 'aset/bross9.webp', desc: 'Bross Limited Edition.' }
+            ],
+            lemari: [
+                { id: 'lemari_1', name: 'Tas Pink Cantik', price: 25000, img: 'aset/tas10.webp', desc: 'Tas simple untuk aktivitasmu.' },
+                { id: 'lemari_2', name: 'Tas kanvas Rajut', price: 40000, img: 'aset/tas11.webp', desc: 'Tas kanvas rajut untuk aktivitasmu.' },
+                { id: 'lemari_3', name: 'Tas Cantik', price: 25000, img: 'aset/tas8.webp', desc: 'Tas simple untuk aktivitasmu.' },
+                { id: 'lemari_4', name: 'Tas Batik', price: 25000, img: 'aset/tas9.webp', desc: 'Tas batik cantik untuk aktivitasmu.' },
+                { id: 'lemari_5', name: 'Tas Rajut Cantik', price: 75000, img: 'aset/tas6.webp', desc: 'Tas rajut cantik untuk aktivitasmu.' },
+                { id: 'lemari_6', name: 'Clutch Cantik', price: 40000, img: 'aset/tas7.webp', desc: 'Clutch simple untuk aktivitasmu.' },
+                { id: 'lemari_7', name: 'Tas Kulit Cantik', price: 45000, img: 'aset/tas5.webp', desc: 'Tas kulit cantik untuk aktivitasmu.' },
+                { id: 'lemari_8', name: 'Tas Ungu Cantik', price: 60000, img: 'aset/tas3.webp', desc: 'Tas ungu cantik untuk aktivitasmu.' },
+                { id: 'lemari_9', name: 'Tas Kanvas Cantik', price: 25000, img: 'aset/tas2.webp', desc: 'Tas kanvas cantik untuk aktivitasmu.' },
+                { id: 'lemari_10', name: 'Tas Jinjing pesta', price: 85000, img: 'aset/tas4.webp', desc: 'Tas jinjing pesta untuk pancarkan pesonamu.' },
+                { id: 'lemari_11', name: 'Tas Rajut Krem', price: 75000, img: 'aset/tas1.webp', desc: 'Tas rajut krem untuk aktivitasmu.' },
+                { id: 'lemari_12', name: 'Tas Jeans ransel', price: 150000, img: 'aset/tas.webp', desc: 'Tas Jeans Ransel untuk aktivitasmu.' },
+                { id: 'lemari_13', name: 'Sandal Lawrensia', price: 100000, img: 'aset/sandal.webp', desc: 'Preloved, Desain elegan,nyaman dipakai.' },
+                { id: 'lemari_14', name: 'Mainan Edukasi Al-Qolam', price: 100000, img: 'aset/edukasi.webp', desc: 'Mainan edukasi belajar Quran untuk anak-anak.' },
+                { id: 'lemari_15', name: 'Kandang hamster', price: 60000, img: 'aset/hamster.webp', desc: 'Kandang hamster dengan Treadmill.' },
+                { id: 'lemari_16', name: 'Baby Walker 2nd', price: 126000, img: 'aset/mainan.webp', desc: 'baby walker masih normal dan siap pakai.' },
+                { id: 'lemari_17', name: 'Stroller 2nd', price: 200000, img: 'aset/stroller.webp', desc: 'Stroller untuk kebutuhan bayi.' }
+            ],
+            slondok: [
+                { id: 'slo_1', name: 'Krupuk Slondok', price: 253500, img: 'aset/slondok.webp', desc: '1 bal (16 pack @300 gram mentah) R0 253.500.' },
+            ],
+            nira: [
+                { id: 'nira_1', name: 'Dompet Jeans', price: 120000, img: 'aset/dompet.webp', desc: 'Dompet jeans Handmade by Nittabross.' },
+                { id: 'nira_2', name: 'Tas Tenteng', price: 120000, img: 'aset/tenteng.webp', desc: 'Tas tenteng untuk aktivitasmu.' },
+            ],     
+            mc: [
+                { id: 'mc_1', name: 'MC Acara Anak-anak', price:250000, img: 'aset/mcanak.webp', desc: 'MC untuk acara anak-anak.' },   
+                { id: 'mc_2', name: 'MC Semi Formal/Santai', price:500000, img: 'aset/mcformal.webp', desc: 'MC untuk acara semi formal/santai.' },    
+                { id: 'mc_3', name: 'MC Acara Resepsi/Resmi', price:1500000, img: 'aset/mcacara.webp', desc: 'MC untuk acara Resmi/resepsi,.' },    
+                { id: 'mc_4', name: 'MC Resmi/Formal Double', price:2000000, img: 'aset/profesional.webp', desc: 'MC untuk acara resmi/formal double (2 MC).' },                           
+            ],
+            marketing: [
+                { id: 'mar_1', name: 'Freelance Marketing', price: 5000, img: 'aset/status.webp', desc: 'silahkan kontak admin untuk memilih layanan.' },
+            ],
+            buku: [
+                { id: 'buku_1', name: 'Mengubah Sampah Menjadi Emas', price: 75000, img: 'aset/buku1.webp', desc: 'Buku mengubah sampai menjadi emas (PO).' },
+                { id: 'buku_2', name: 'Resonansi', price: 45000, img: 'aset/buku2.webp', desc: 'Buku resonansi.' },
+                { id: 'buku_3', name: 'Look Deeper', price: 45000, img: 'aset/buku3.webp', desc: 'Buku Look Deeper.' },
+                { id: 'buku_4', name: 'Start Your Business With Less Money', price: 75000, img: 'aset/buku4.webp', desc: 'Buku Start Your Business.' },
+                { id: 'buku_5', name: 'Aku dan 27.000 ku', price: 45000, img: 'aset/buku7.webp', desc: 'Buku Aku dan 27.000 ku.' },
+                { id: 'buku_6', name: 'Produktif Ala Pawonpreneur', price: 75000, img: 'aset/buku8.webp', desc: 'Buku Produktif Ala Pawonpreneur.' },
+            ]
         };
+
+        // Wadah produk yang nanti tampil di layar
+        let productsData = {};
 
         // State Aplikasi
         let cart = {}; 
         let currentDivisionId = null; 
 
-        // --- FETCH DATA FROM GOOGLE SHEETS CSV ---
+        // --- FETCH DATA FROM GOOGLE SHEETS CSV (HYBRID MODE) ---
         async function loadProductsFromSheets() {
             try {
+                // 1. KITA LOAD DULU DATA BAWAAN LU BIAR GA KOSONG
+                productsData = JSON.parse(JSON.stringify(dataBawaan));
+
+                // 2. LALU KITA SEDOT DATA DARI GOOGLE SHEETS
                 const response = await fetch(csvUrl);
                 const data = await response.text();
                 const baris = data.split('\n');
-
-                // Reset data produk sebelum diisi ulang
-                for (let key in productsData) {
-                    productsData[key] = [];
-                }
 
                 // Mulai dari index 1 (melewati header baris 1)
                 for (let i = 1; i < baris.length; i++) {
@@ -330,7 +142,7 @@
                     const desc = kolom[3].trim();
                     const categoryName = kolom[4].trim().toLowerCase();
 
-                    const id = 'prod_' + i;
+                    const id = 'sheet_prod_' + i; // ID khusus buat data dari Sheet
 
                     // Cocokkan kategori dari Sheet dengan ID atau nama Divisi
                     let targetDivId = 'lemari'; // Default fallback
@@ -340,6 +152,7 @@
                         }
                     });
 
+                    // 3. TAMBAHIN DATA DARI SHEET KE DALAM WADAH PRODUK
                     if (productsData[targetDivId]) {
                         productsData[targetDivId].push({ id, name, price, img, desc });
                     }
@@ -476,7 +289,7 @@
             if (productsToRender.length === 0) {
                 const emptyState = document.createElement('div');
                 emptyState.className = 'col-span-2 md:col-span-5 text-center py-16 text-slate-400';
-                emptyState.innerHTML = `<i class="fas fa-box-open text-3xl mb-2"></i><p class="text-sm font-medium">Belum ada produk untuk kategori ini di Google Sheets.</p>`;
+                emptyState.innerHTML = `<i class="fas fa-box-open text-3xl mb-2"></i><p class="text-sm font-medium">Belum ada produk untuk kategori ini.</p>`;
                 container.appendChild(emptyState);
                 return;
             }
@@ -773,8 +586,6 @@
         // --- INIT ---
         window.onload = async () => {
             renderDivisions();
-            await loadProductsFromSheets(); // Ambil data saat web pertama kali dibuka
+            await loadProductsFromSheets(); // Sedot data kombinasi (bawaan + google sheet) saat buka web
         };
     </script>
-</body>
-</html>
