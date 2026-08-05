@@ -827,6 +827,7 @@
             listContainer.innerHTML = html;
         }
 
+      // --- 10. WHATSAPP & GOOGLE SHEETS INTEGRATION ---
         function checkoutToWA() {
             const { items, totalPrice } = getCartDetails();
             
@@ -844,6 +845,29 @@
                 return;
             }
 
+            // 1. Siapin list barang buat dimasukin ke Excel
+            let detailPesanan = '';
+            items.forEach((item) => {
+                detailPesanan += `- ${item.product.name} (${item.qty}x)\n`;
+            });
+
+            // 2. KIRIM DATA KE GOOGLE SHEETS DULU
+            // TEMPEL LINK WEB APP APPS SCRIPT LU DI DALAM TANDA KUTIP INI BROO:
+            const scriptURL = 'https://script.google.com/macros/s/AKfycbzPVbTAk2N2gFrZiMFslSa92SVTZxrvphBZHWbFbOasY0jlJCVlBnDGcVRRX1-OvH0y/exec'; 
+            
+            const formData = new FormData();
+            formData.append('nama', custName);
+            formData.append('wa', custWA);
+            formData.append('alamat', custAddress);
+            formData.append('pesanan', detailPesanan);
+            formData.append('total', formatRupiah(totalPrice));
+
+            // Perintah tembak data di balik layar (tanpa pindah halaman)
+            fetch(scriptURL, { method: 'POST', body: formData, mode: 'no-cors' })
+                .then(() => console.log('Data sukses direkam ke Google Sheets!'))
+                .catch(error => console.error('Gagal rekam data:', error));
+
+            // 3. BARU BUKA WHATSAPPNYA
             let message = `Halo Admin *Nitta Group*, saya ingin melakukan pemesanan.\n\n`;
             
             message += `*📋 DATA PEMESAN*\n`;
@@ -852,7 +876,7 @@
             message += `▪️ Alamat : ${custAddress}\n\n`;
 
             message += `*🛍️ RINCIAN PESANAN*\n`;
-            items.forEach((item, index) => {
+            items.forEach((item) => {
                 message += `▪️ *${item.product.name}*\n`;
                 message += `   ${item.qty} x ${formatRupiah(item.product.price)} = ${formatRupiah(item.product.price * item.qty)}\n`;
             });
