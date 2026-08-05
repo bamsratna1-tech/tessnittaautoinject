@@ -498,20 +498,14 @@
             document.querySelectorAll('.swing-on-scroll').forEach(el => observer.observe(el));
         }
 
-        async function openCatalog(division) {
+        function openCatalog(division) {
             currentDivisionId = division.id;
             document.getElementById('homePage').classList.remove('active');
             document.getElementById('catalogPage').classList.add('active');
             document.getElementById('catalogTitle').innerText = division.name;
             window.scrollTo(0, 0);
 
-            // Bikin tampilan muter (loading) kalau misalnya data baru dari sheet lagi ditarik
-            const container = document.getElementById('productsContainer');
-            container.innerHTML = '<div class="col-span-2 md:col-span-5 text-center py-12 text-slate-400"><i class="fas fa-spinner fa-spin text-2xl mb-2"></i><p class="text-sm mt-2">Menyiapkan Katalog...</p></div>';
-
-            // Refresh update data dari Google Sheets (kalau-kalau admin abis masukin barang)
-            await loadProductsFromSheets();
-            
+            // Langsung render produk dari memori, instan secepat kilat!
             renderProducts();
             updateCartUI();
         }
