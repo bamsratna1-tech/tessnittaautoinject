@@ -884,13 +884,13 @@
             window.open(waUrl, '_blank');
         }
 
-        // --- INIT SAAT WEB DIBUKA ---
-        window.onload = async () => {
-            // Muat produk dari bawaan + google sheets di background
-            await loadProductsFromSheets();
-            
-            // Tampilkan halaman divisi (beranda)
+      // --- 11. INIT SAAT WEB DIBUKA ---
+        window.onload = () => {
+            // 1. Tampilkan menu kategori detik itu juga (Instan!)
             renderDivisions();
+            
+            // 2. Biarkan sistem nyedot data GSheet jalan di belakang layar tanpa nahan tampilan web
+            loadProductsFromSheets(); 
         };
 
     </script>
